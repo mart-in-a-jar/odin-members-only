@@ -6,7 +6,7 @@ import session from "express-session";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
-import indexRouter from "./routes/indexRouter.js"
+import indexRouter from "./routes/indexRouter.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -30,9 +30,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", indexRouter)
+// make user object available (so we don't have to pass it into every view)
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
 
-app.use(express.static(path.join(__dirname, "./client/public")))
+app.use("/", indexRouter);
+
+app.use(express.static(path.join(__dirname, "./client/public")));
 
 // 404-catcher
 app.use((req, res, next) => {

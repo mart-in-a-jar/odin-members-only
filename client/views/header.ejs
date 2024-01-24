@@ -8,5 +8,9 @@
         <title>Members only</title>
     </head>
     <body>
-      <div class="main">
-
+        <header>
+            <% if (user) {%>
+            <a href="/logout">Log out</a>
+            <%} %>
+        </header>
+        <div class="main">

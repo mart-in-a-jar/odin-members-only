@@ -12,10 +12,24 @@ router.get("/", (req, res) => {
 
 router.post(
     "/login",
-    passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/",
-    })
+    passport.authenticate(
+        "local",
+        {
+            successRedirect: "/",
+            failureRedirect: "/",
+        } /* , (err, user, options) => {
+        console.log({err, user, options})
+    } */
+    )
 );
+
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
+});
 
 export default router;
