@@ -11,6 +11,7 @@ html {
 
 body {
     margin: 0;
+    padding: 5px;
     background-color: #f2f2f2;
     color: #222222;
 }
@@ -21,7 +22,7 @@ header {
     grid-template-columns: 3fr 1fr;
     a {
         grid-column: 2;
-        justify-self: end
+        justify-self: end;
     }
 }
 
@@ -36,5 +37,41 @@ header {
 .login {
     form {
         margin-bottom: 20px;
+    }
+}
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 250px;
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            input {
+                height: 30px;
+            }
+        }
+        button {
+            align-self: center;
+            width: 60%;
+            height: 40px;
+        }
+    }
+    .errors {
+        padding-left: 0;
+        color: red;
+    }
+}
+
+.error-page {
+    h1 {
+        margin-bottom: 0;
     }
 }

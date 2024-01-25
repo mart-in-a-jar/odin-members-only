@@ -40,7 +40,7 @@ app.use("/", indexRouter);
 
 app.use(express.static(path.join(__dirname, "./client/public")));
 
-// 404-catcher
+// 404-catcher, forward error to error handler
 app.use((req, res, next) => {
     const err = new Error("Not found");
     err.status = 404;
@@ -50,9 +50,10 @@ app.use((req, res, next) => {
 // Error handler
 app.use((err, req, res, next) => {
     const errorCode = err.status || 500;
-    res.status(err.status || errorCode).json({
+    /* res.status(err.status || errorCode).json({
         error: { message: err.message, code: err.status || errorCode },
-    });
+    }); */
+    res.render("error", {errorCode});
 });
 
 app.listen(process.env.PORT);

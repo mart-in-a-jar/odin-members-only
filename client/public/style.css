@@ -11,6 +11,7 @@ html {
 
 body {
   margin: 0;
+  padding: 5px;
   background-color: #f2f2f2;
   color: #222222;
 }
@@ -35,6 +36,40 @@ header a {
 
 .login form {
   margin-bottom: 20px;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+}
+.signup form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 250px;
+}
+.signup form .form-control {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.signup form .form-control input {
+  height: 30px;
+}
+.signup form button {
+  align-self: center;
+  width: 60%;
+  height: 40px;
+}
+.signup .errors {
+  padding-left: 0;
+  color: red;
+}
+
+.error-page h1 {
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

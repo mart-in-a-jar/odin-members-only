@@ -1,5 +1,5 @@
 # Members only
-Project to practice authentication
+Project to practice authentication. No focus on design
 
 - Express
 - Passport
