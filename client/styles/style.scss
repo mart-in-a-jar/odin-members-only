@@ -20,7 +20,7 @@ header {
     padding: 5px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    a[href="/logout"] {
+    a[href^="/log"] {
         grid-column: -1;
         justify-self: end;
     }

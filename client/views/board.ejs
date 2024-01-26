@@ -2,7 +2,7 @@
 
 <h1>Board</h1>
 <div class="board">
-    Hello <%= `${user.firstname}  ${user.lastname}` %>
+    <% if(user) { %> Hello <%= `${user.firstname} ${user.lastname}` %> <% } %>
 </div>
 
 <%- include("footer") %>

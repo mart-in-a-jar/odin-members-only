@@ -11,7 +11,10 @@
     </script>
     <% } %>
     <h1>Login</h1>
-    <form action="/login" method="POST">
+    <form
+        action='<%- `/login${locals.redirect ? "?redirect=" + redirect : ""}` %>'
+        method="POST"
+    >
         <label for="username">Username</label>
         <input name="username" placeholder="username" type="text" />
         <label for="password">Password</label>

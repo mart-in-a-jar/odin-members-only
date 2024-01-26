@@ -12,6 +12,8 @@
             <% if (user) {%>
             <a href="/join">Join club</a>
             <a href="/logout">Log out</a>
-            <%} %>
+            <%} else { %>
+            <a href="/login">Log in</a>
+            <% } %>
         </header>
         <div class="main">

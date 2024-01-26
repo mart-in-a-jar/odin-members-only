@@ -6,25 +6,33 @@ import { createUser } from "../controllers/createUser.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    if (req.user) {
-        return res.render("board", { user: req.user });
-    }
-    const userCreated = req.query.hasOwnProperty("user_created");
-    res.render("login", { newUser: userCreated });
+    res.render("board", { user: req.user });
 });
 
-router.post(
-    "/login",
-    passport.authenticate(
-        "local",
-        {
-            successRedirect: "/",
-            failureRedirect: "/",
-        } /* , (err, user, options) => {
+router
+    .route("/login")
+    .get((req, res) => {
+        const userCreated = req.query.hasOwnProperty("user_created");
+        res.render("login", {
+            newUser: userCreated,
+            redirect: req.query.redirect,
+        });
+    })
+    .post(
+        passport.authenticate(
+            "local",
+            {
+                // successRedirect: "/",
+                failureRedirect: "/",
+            } /* , (err, user, options) => {
         console.log({err, user, options})
     } */
-    )
-);
+        ),
+        (req, res) => {
+            const redirect = req.query.redirect || "";
+            res.redirect("/" + redirect);
+        }
+    );
 
 router.get("/logout", (req, res, next) => {
     req.logout((err) => {
@@ -44,7 +52,7 @@ router
 
 router.route("/join").get((req, res) => {
     if (!req.user) {
-        return res.redirect("/?redirect=join");
+        return res.redirect("/login?redirect=join");
     }
     res.render("join");
 });
