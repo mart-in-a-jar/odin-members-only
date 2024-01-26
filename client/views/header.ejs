@@ -11,6 +11,14 @@
         <header>
             <% if (user) {%>
             <a href="/join">Join club</a>
+            <div class="person-info">
+                <div><%= `${user.firstname} ${user.lastname}` %></div>
+                <% if(user.member) { %>
+                <div>😎 Member</div>
+                <% } %> <% if(user.admin) { %>
+                <div>⭐ Admin</div>
+                <% } %>
+            </div>
             <a href="/logout">Log out</a>
             <%} else { %>
             <a href="/login">Log in</a>

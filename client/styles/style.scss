@@ -19,10 +19,13 @@ body {
 header {
     padding: 5px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     a[href^="/log"] {
         grid-column: -1;
         justify-self: end;
+    }
+    .person-info {
+        justify-self: center;
     }
 }
 
@@ -31,7 +34,6 @@ header {
     flex-direction: column;
     align-items: center;
     margin: 10px;
-    margin-top: 150px;
 }
 
 .login {
