@@ -40,6 +40,9 @@ header {
 .login {
     form {
         margin-bottom: 20px;
+        input {
+            height: 30px;
+        }
     }
 }
 
@@ -48,29 +51,29 @@ header {
     flex-direction: column;
     align-items: center;
     max-width: 500px;
-    form {
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+    .form-control {
         display: flex;
         flex-direction: column;
-        gap: 10px;
-        width: 250px;
-        .form-control {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            input {
-                height: 30px;
-            }
-        }
-        button {
-            align-self: center;
-            width: 60%;
-            height: 40px;
+        gap: 3px;
+        input {
+            height: 30px;
         }
     }
-    .errors {
-        padding-left: 0;
-        color: red;
+    button {
+        align-self: center;
+        width: 60%;
+        height: 40px;
     }
+}
+.errors {
+    padding-left: 0;
+    color: red;
 }
 
 .error-page {

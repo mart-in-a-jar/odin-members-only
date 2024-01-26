@@ -12,11 +12,12 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <% if (user) {%> <% if(!user.member) { %>
+                    <% if(user &&!user.member) { %>
                     <li><a href="/join">Join club</a></li>
                     <% } %>
                 </ul>
             </nav>
+            <% if (user) {%>
             <div class="person-info">
                 <div><%= `${user.firstname} ${user.lastname}` %></div>
                 <% if(user.member) { %>

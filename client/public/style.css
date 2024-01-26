@@ -40,6 +40,9 @@ header .person-info {
 .login form {
   margin-bottom: 20px;
 }
+.login form input {
+  height: 30px;
+}
 
 .signup {
   display: flex;
@@ -47,26 +50,28 @@ header .person-info {
   align-items: center;
   max-width: 500px;
 }
-.signup form {
+
+form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 250px;
 }
-.signup form .form-control {
+form .form-control {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
-.signup form .form-control input {
+form .form-control input {
   height: 30px;
 }
-.signup form button {
+form button {
   align-self: center;
   width: 60%;
   height: 40px;
 }
-.signup .errors {
+
+.errors {
   padding-left: 0;
   color: red;
 }

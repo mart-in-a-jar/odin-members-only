@@ -1,5 +1,20 @@
 <%- include("header") -%>
 
-<div class="join">Hello</div>
+<div class="join">
+    <form action="/join" method="POST">
+        <div class="form-control">
+            <label for="password">Enter code to join the club</label>
+            <input type="password" name="password" id="password" />
+        </div>
+        <button type="submit">Join</button>
+    </form>
+    <% if (locals.errors) {%>
+        <ul class="errors">
+            <% errors.map(function(error) {%>
+            <li><%= error %></li>
+            <% }) %>
+        </ul>
+        <%} %>
+</div>
 
 <%- include("footer") -%>
