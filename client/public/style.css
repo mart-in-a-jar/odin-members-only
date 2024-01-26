@@ -22,10 +22,11 @@ header {
   grid-template-columns: 1fr 2fr 1fr;
 }
 header a[href^="/log"] {
-  grid-column: -1;
+  grid-column: -2;
   justify-self: end;
 }
 header .person-info {
+  grid-column: -3;
   justify-self: center;
 }
 
@@ -76,6 +77,15 @@ header .person-info {
 
 .new-user-msg {
   color: hsl(120, 100%, 30%);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+nav ul li:not(:last-child) {
+  margin-bottom: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,8 +9,14 @@
     </head>
     <body>
         <header>
-            <% if (user) {%>
-            <a href="/join">Join club</a>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <% if (user) {%> <% if(!user.member) { %>
+                    <li><a href="/join">Join club</a></li>
+                    <% } %>
+                </ul>
+            </nav>
             <div class="person-info">
                 <div><%= `${user.firstname} ${user.lastname}` %></div>
                 <% if(user.member) { %>
