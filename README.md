@@ -4,6 +4,7 @@ Project to practice authentication. No focus on design
 - Express
 - Passport
 - bcrypt
+- express-validator
 - ejs
 - sass
 

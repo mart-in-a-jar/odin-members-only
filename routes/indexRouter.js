@@ -9,7 +9,8 @@ router.get("/", (req, res) => {
     if (req.user) {
         return res.render("board", { user: req.user });
     }
-    res.render("login");
+    const userCreated = req.query.hasOwnProperty("user_created");
+    res.render("login", { newUser: userCreated });
 });
 
 router.post(

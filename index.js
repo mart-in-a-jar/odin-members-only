@@ -53,7 +53,8 @@ app.use((err, req, res, next) => {
     /* res.status(err.status || errorCode).json({
         error: { message: err.message, code: err.status || errorCode },
     }); */
-    res.render("error", {errorCode});
+    console.error(err);
+    res.render("error", { errorCode });
 });
 
 app.listen(process.env.PORT);
