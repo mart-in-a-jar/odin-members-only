@@ -42,4 +42,11 @@ router
     })
     .post([validateUser(), createUser]);
 
+router.route("/join").get((req, res) => {
+    if (!req.user) {
+        return res.redirect("/?redirect=join");
+    }
+    res.render("join");
+});
+
 export default router;
