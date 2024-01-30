@@ -95,6 +95,9 @@ router
     });
 
 router.route("/message").post(async (req, res, next) => {
+    if (!req.user) {
+        next(new Error("not logged in"));
+    }
     try {
         const message = await Message.create({
             title: req.body.title,
