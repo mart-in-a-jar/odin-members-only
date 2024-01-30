@@ -1,6 +1,17 @@
 # Members only
-Project to practice authentication. No focus on design
+[Project](https://www.theodinproject.com/lessons/nodejs-members-only) to practice authentication. No focus on design
+### Features
+- View messages
+- Sign up
+- Sign in
+- Join club with secret code
+- Logged in users can post messages
+- Members can see the author of other messages
+- Admins can delete messages
 
+Password to become member: 8ug67a
+
+### Tools
 - Express
 - Passport
 - bcrypt
@@ -9,7 +20,6 @@ Project to practice authentication. No focus on design
 - sass
 
 
-Password to become member: 8ug67a
 
 
 ### Dev
