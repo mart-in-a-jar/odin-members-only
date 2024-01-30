@@ -18,7 +18,7 @@ const createUser = async (req, res, next) => {
             lastname,
             password,
         });
-        res.redirect("/?user_created");
+        res.redirect("/login?user_created");
     } catch (error) {
         return next(error);
     }
