@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, "./client/public")));
 
 // 404-catcher, forward error to error handler
 app.use((req, res, next) => {
-    const err = new Error("Not found");
+    const err = new Error(`Not found: ${req.originalUrl}`);
     err.status = 404;
     next(err);
 });
