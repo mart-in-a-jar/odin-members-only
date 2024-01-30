@@ -5,11 +5,21 @@ import { validateUser } from "../controllers/helpers/userValidation.js";
 import { createUser } from "../controllers/createUser.js";
 import User from "../models/User.js";
 import Password from "../models/Password.js";
+import Message from "../models/Message.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    res.render("board", { user: req.user });
+router.get("/", async (req, res, next) => {
+    let messages = null;
+    try {
+        messages = await Message.find()
+            .sort({ createdAt: -1 })
+            .limit(20)
+            .populate("author")
+            .exec();
+        console.log(messages);
+    } catch (error) {}
+    res.render("board", { messages: messages });
 });
 
 router
@@ -83,5 +93,18 @@ router
             next(error);
         }
     });
+
+router.route("/message").post(async (req, res, next) => {
+    try {
+        const message = await Message.create({
+            title: req.body.title,
+            text: req.body.message,
+            author: req.user._id,
+        });
+        res.redirect("/");
+    } catch (error) {
+        next(error);
+    }
+});
 
 export default router;

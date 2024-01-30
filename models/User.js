@@ -61,5 +61,9 @@ UserSchema.pre("save", async function (next) {
     }
 });
 
+UserSchema.virtual("name").get(function () {
+    return `${this.firstname} ${this.lastname}`;
+});
+
 const model = mongoose.model("users", UserSchema);
 export default model;

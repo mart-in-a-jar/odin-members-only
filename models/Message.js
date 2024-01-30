@@ -23,5 +23,9 @@ const MessageSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
+MessageSchema.virtual("timestamp").get(function () {
+    return new Date(this.createdAt).toLocaleString("no-NO")
+});
+
 const model = mongoose.model("messages", MessageSchema);
 export default model;

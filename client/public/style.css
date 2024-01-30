@@ -93,4 +93,42 @@ nav ul li:not(:last-child) {
   margin-bottom: 5px;
 }
 
+.board {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+.board h1 {
+  margin-bottom: 15px;
+  align-self: center;
+}
+.board form {
+  margin-bottom: 50px;
+  align-self: center;
+}
+.board .message-wrapper {
+  background-color: #e8e8e8;
+  padding: 8px;
+  border-radius: 5px;
+  width: 450px;
+  max-height: 500px;
+}
+.board .message-wrapper:not(:last-child) {
+  margin-bottom: 15px;
+}
+.board .message-wrapper .message h2 {
+  margin: 0;
+}
+.board .message-wrapper .details {
+  border-top: 1px solid;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.board .message-wrapper.own {
+  background-color: hsl(240, 50%, 45%);
+  color: whitesmoke;
+  align-self: flex-end;
+}
+
 /*# sourceMappingURL=style.css.map */

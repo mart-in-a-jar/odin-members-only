@@ -96,3 +96,46 @@ nav {
         }
     }
 }
+
+.board {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+
+    h1 {
+        margin-bottom: 15px;
+        align-self: center;
+    }
+
+    form {
+        margin-bottom: 50px;
+        align-self: center;
+    }
+
+    .message-wrapper {
+        background-color: #e8e8e8;
+        padding: 8px;
+        border-radius: 5px;
+        width: 450px;
+        max-height: 500px;
+        &:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        .message {
+            h2 {
+                margin: 0;
+            }
+        }
+        .details {
+            border-top: 1px solid;
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+        }
+        &.own {
+            background-color: hsl(240, 50%, 45%);
+            color: whitesmoke;
+            align-self: flex-end;
+        }
+    }
+}
