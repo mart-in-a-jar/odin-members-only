@@ -6,41 +6,73 @@
     <form action="/message" method="POST">
         <div class="form-control">
             <label for="title">Title</label>
-            <input type="text" name="title" id="title" required>
+            <input type="text" name="title" id="title" required />
         </div>
         <div class="form-control">
             <label for="message">New message</label>
-            <textarea name="message" id="message" cols="50" rows="4" required></textarea>
+            <textarea
+                name="message"
+                id="message"
+                cols="50"
+                rows="4"
+                required
+            ></textarea>
         </div>
         <button type="submit">Post message</button>
     </form>
-    <% } %> 
-    <% if(locals.messages) { %> 
-        <% for(const message of messages) { %>
-            <div class="message-wrapper <%= message.author.username === user?.username ? 'own' : '' %>">
-                <div class="message">
-                    <h2><%= message.title%></h2>
-                    <p><%= message.text%></p>
-                </div>
-                <div class="details">
-                    <% if(user?.member || message.author.username === user?.username) { %>
-                        <div class="author">
-                            <% if (message.author.member) { %>
-                                <span>😎</span>
-                                <% } %>
-                                <% if (message.author.admin) { %>
-                                    <span>⭐</span>
-                                    <% } %>
-                                    <span><%= message.author.name %></span>
-                                </div>
-                            <% } else { %>
-                                <div></div>
-                                <% } %>
-                    <div class="timestamp"><%= message.timestamp %></div>
-                </div>
+    <% } %> <% if(locals.messages) { %> <% for(const message of messages) { %>
+    <div
+        class="message-wrapper <%= message.author.username === user?.username ? 'own' : '' %>"
+    >
+        <% if(user?.admin) { %>
+        <span
+            role="button"
+            tabindex="0"
+            class="delete-message"
+            data-id="<%= message.id %>"
+            >&times;</span
+        >
+        <% } %>
+        <div class="message">
+            <h2><%= message.title%></h2>
+            <p><%= message.text%></p>
+        </div>
+        <div class="details">
+            <% if(user?.member || message.author.username === user?.username) {
+            %>
+            <div class="author">
+                <% if (message.author.member) { %>
+                <span>😎</span>
+                <% } %> <% if (message.author.admin) { %>
+                <span>⭐</span>
+                <% } %>
+                <span><%= message.author.name %></span>
             </div>
-    <% } %> 
-    <% } %>
+            <% } else { %>
+            <div></div>
+            <% } %>
+            <div class="timestamp"><%= message.timestamp %></div>
+        </div>
+    </div>
+    <% } %> <% } %>
 </div>
+
+<script>
+    const deleteButtons = document.querySelectorAll(".delete-message");
+    deleteButtons.forEach((button) => {
+        button.addEventListener("click", async (e) => {
+            const id = e.target.dataset.id;
+            const url = "/message";
+            const res = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id: id }),
+            });
+            location.reload();
+        });
+    });
+</script>
 
 <%- include("footer") %>

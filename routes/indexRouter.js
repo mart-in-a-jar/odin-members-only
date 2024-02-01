@@ -17,7 +17,6 @@ router.get("/", async (req, res, next) => {
             .limit(20)
             .populate("author")
             .exec();
-        console.log(messages);
     } catch (error) {}
     res.render("board", { messages: messages });
 });
@@ -94,20 +93,33 @@ router
         }
     });
 
-router.route("/message").post(async (req, res, next) => {
-    if (!req.user) {
-        next(new Error("not logged in"));
-    }
-    try {
-        const message = await Message.create({
-            title: req.body.title,
-            text: req.body.message,
-            author: req.user._id,
-        });
-        res.redirect("/");
-    } catch (error) {
-        next(error);
-    }
-});
+router
+    .route("/message")
+    .post(async (req, res, next) => {
+        if (!req.user) {
+            next(new Error("not logged in"));
+        }
+        try {
+            const message = await Message.create({
+                title: req.body.title,
+                text: req.body.message,
+                author: req.user._id,
+            });
+            res.redirect("/");
+        } catch (error) {
+            next(error);
+        }
+    })
+    .delete(async (req, res, next) => {
+        if (!req.user?.admin) {
+            return next(new Error("only admins can delete messages"));
+        }
+        try {
+            await Message.findByIdAndDelete(req.body.id);
+            res.sendStatus(204);
+        } catch (error) {
+            next(error);
+        }
+    });
 
 export default router;

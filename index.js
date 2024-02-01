@@ -12,7 +12,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 app.disable("x-powered-by");
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 mongoose.connect(process.env.MONGO_URL, { dbName: process.env.MONGO_DB });
@@ -54,6 +54,7 @@ app.use((err, req, res, next) => {
         error: { message: err.message, code: err.status || errorCode },
     }); */
     console.error(err);
+    res.status(errorCode)
     res.render("error", { errorCode });
 });
 

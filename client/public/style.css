@@ -112,6 +112,16 @@ nav ul li:not(:last-child) {
   border-radius: 5px;
   width: 450px;
   max-height: 500px;
+  position: relative;
+}
+.board .message-wrapper .delete-message {
+  position: absolute;
+  top: -6px;
+  right: 3px;
+  color: red;
+  font-size: 2rem;
+  cursor: pointer;
+  appearance: none;
 }
 .board .message-wrapper:not(:last-child) {
   margin-bottom: 15px;
