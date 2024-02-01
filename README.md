@@ -1,5 +1,8 @@
 # Members only
-[Project](https://www.theodinproject.com/lessons/nodejs-members-only) to practice authentication. No focus on design
+[Project](https://www.theodinproject.com/lessons/nodejs-members-only) to practice authentication and database actions. No focus on design. No email verification.
+
+Hosted on railway: https://odin-members-only-production-aba3.up.railway.app/
+
 ### Features
 - View messages
 - Sign up
@@ -33,7 +36,7 @@ npm run dev
 ```
 
 #### Env variables
-PORT = 3000
-MONGO_URL = "mongodb://localhost:27017"
-MONGO_DB = "members-only"
-COOKIE_SECRET = 
+PORT = 3000  
+MONGO_URL = "mongodb://localhost:27017"  
+MONGO_DB = "members-only"  
+COOKIE_SECRET =  
