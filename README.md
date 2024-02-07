@@ -11,6 +11,7 @@ Hosted on railway: https://odin-members-only-production-aba3.up.railway.app/
 - Logged in users can post messages
 - Members can see the author of other messages
 - Admins can delete messages
+- hCaptcha: Visible (message form) and invisible (sign up form)
 
 Password to become member: 8ug67a
 
@@ -21,8 +22,7 @@ Password to become member: 8ug67a
 - express-validator
 - ejs
 - sass
-
-
+- hCaptcha
 
 
 ### Dev
@@ -40,3 +40,4 @@ PORT = 3000
 MONGO_URL = "mongodb://localhost:27017"  
 MONGO_DB = "members-only"  
 COOKIE_SECRET =  
+HCAPTCHA_SECRET = 

@@ -141,4 +141,9 @@ nav ul li:not(:last-child) {
   align-self: flex-end;
 }
 
+.h-captcha-terms {
+  margin-top: 50px;
+  font-size: 0.8rem;
+}
+
 /*# sourceMappingURL=style.css.map */

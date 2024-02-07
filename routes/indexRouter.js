@@ -67,7 +67,25 @@ router
     .get((req, res) => {
         res.render("signup");
     })
-    .post([validateUser(), createUser]);
+    .post([
+        async (req, res, next) => {
+            try {
+                const hCaptchaResponse = await validate(
+                    req.body["h-captcha-response"]
+                );
+                if (!hCaptchaResponse.success) {
+                    const error = new Error(hCaptchaResponse["error-codes"]);
+                    error.status = 403;
+                    return next(error);
+                }
+            } catch (error) {
+                return next(error);
+            }
+            next()
+        },
+        validateUser(),
+        createUser,
+    ]);
 
 router
     .route("/join")
@@ -109,11 +127,13 @@ router
             return next(error);
         }
         try {
-            const hCaptchaResponse = await validate(req.body["h-captcha-response"]);
-            if(!hCaptchaResponse.success) {
-                const error = new Error(hCaptchaResponse["error-codes"])
-                error.status = 403
-                return next(error)
+            const hCaptchaResponse = await validate(
+                req.body["h-captcha-response"]
+            );
+            if (!hCaptchaResponse.success) {
+                const error = new Error(hCaptchaResponse["error-codes"]);
+                error.status = 403;
+                return next(error);
             }
             const message = await Message.create({
                 title: req.body.title,

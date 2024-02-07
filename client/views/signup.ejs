@@ -2,7 +2,7 @@
 
 <div class="signup">
     <h1>Sign up</h1>
-    <form action="/signup" method="POST">
+    <form id="signupForm" action="/signup" method="POST">
         <div class="form-control">
             <label for="username">Username (email)</label>
             <input
@@ -41,7 +41,8 @@
             <label for="confirmPassword">Confirm password</label>
             <input name="confirmPassword" type="password" required />
         </div>
-        <button type="submit">Sign up</button>
+        <button class="h-captcha" data-sitekey="e09d083b-494d-45e4-892c-041807d3fbdd" data-callback="onSubmit">Sign up</button>
+        <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     </form>
     <% if (locals.errors) {%>
     <ul class="errors">
@@ -51,5 +52,16 @@
     </ul>
     <%} %>
 </div>
+
+<div class="h-captcha-terms">This site is protected by hCaptcha and its
+    <a href="https://www.hcaptcha.com/privacy">Privacy Policy</a> and
+    <a href="https://www.hcaptcha.com/terms">Terms of Service</a> apply.</div>
+
+<script>
+    function onSubmit(token) {
+        const form = document.querySelector("#signupForm");
+        form.submit()
+    }
+</script>
 
 <%- include("footer") -%>
