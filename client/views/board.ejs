@@ -18,7 +18,9 @@
                 required
             ></textarea>
         </div>
-        <button type="submit">Post message</button>
+        <div class="h-captcha" data-sitekey="e09d083b-494d-45e4-892c-041807d3fbdd" data-callback="captchaDone"></div>
+        <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+        <button type="submit" disabled>Post message</button>
     </form>
     <% } %> <% if(locals.messages) { %> <% for(const message of messages) { %>
     <div
@@ -73,6 +75,11 @@
             location.reload();
         });
     });
+
+    function captchaDone() {
+        const submitButton = document.querySelector("form button[type='submit']");
+        submitButton.disabled = false;
+    }
 </script>
 
 <%- include("footer") %>

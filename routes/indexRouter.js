@@ -7,6 +7,7 @@ import User from "../models/User.js";
 import Password from "../models/Password.js";
 import Message from "../models/Message.js";
 import { rateLimit } from "express-rate-limit";
+import { validate } from "../controllers/helpers/validateHCaptcha.js";
 
 const limiter = rateLimit({
     windowMs: 1000 * 60 * 1,
@@ -103,10 +104,17 @@ router
     .route("/message")
     .post(limiter, async (req, res, next) => {
         if (!req.user) {
-            // set 401
-            next(new Error("not logged in"));
+            const error = new Error("not logged in");
+            error.status = 401;
+            return next(error);
         }
         try {
+            const hCaptchaResponse = await validate(req.body["h-captcha-response"]);
+            if(!hCaptchaResponse.success) {
+                const error = new Error(hCaptchaResponse["error-codes"])
+                error.status = 403
+                return next(error)
+            }
             const message = await Message.create({
                 title: req.body.title,
                 text: req.body.message,
