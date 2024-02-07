@@ -6,6 +6,12 @@ import { createUser } from "../controllers/createUser.js";
 import User from "../models/User.js";
 import Password from "../models/Password.js";
 import Message from "../models/Message.js";
+import { rateLimit } from "express-rate-limit";
+
+const limiter = rateLimit({
+    windowMs: 1000 * 60 * 1,
+    limit: 4,
+});
 
 const router = express.Router();
 
@@ -95,8 +101,9 @@ router
 
 router
     .route("/message")
-    .post(async (req, res, next) => {
+    .post(limiter, async (req, res, next) => {
         if (!req.user) {
+            // set 401
             next(new Error("not logged in"));
         }
         try {
@@ -112,6 +119,8 @@ router
     })
     .delete(async (req, res, next) => {
         if (!req.user?.admin) {
+            // if (!user) set 401
+            // set 403
             return next(new Error("only admins can delete messages"));
         }
         try {
