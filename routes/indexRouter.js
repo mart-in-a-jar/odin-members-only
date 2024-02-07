@@ -118,10 +118,12 @@ router
         }
     })
     .delete(async (req, res, next) => {
+        // this endpoint is consumed in front end code, so it returns json
+        if (!req.user) {
+            return res.sendStatus(401);
+        }
         if (!req.user?.admin) {
-            // if (!user) set 401
-            // set 403
-            return next(new Error("only admins can delete messages"));
+            return res.sendStatus(403);
         }
         try {
             await Message.findByIdAndDelete(req.body.id);
