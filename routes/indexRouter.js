@@ -7,7 +7,7 @@ import User from "../models/User.js";
 import Password from "../models/Password.js";
 import Message from "../models/Message.js";
 import { rateLimit } from "express-rate-limit";
-import { validate } from "../controllers/helpers/validateHCaptcha.js";
+import { validateHCaptcha } from "../controllers/helpers/validateHCaptcha.js";
 
 const limiter = rateLimit({
     windowMs: 1000 * 60 * 1,
@@ -68,21 +68,8 @@ router
         res.render("signup");
     })
     .post([
-        async (req, res, next) => {
-            try {
-                const hCaptchaResponse = await validate(
-                    req.body["h-captcha-response"]
-                );
-                if (!hCaptchaResponse.success) {
-                    const error = new Error(hCaptchaResponse["error-codes"]);
-                    error.status = 403;
-                    return next(error);
-                }
-            } catch (error) {
-                return next(error);
-            }
-            next()
-        },
+        validateHCaptcha,
+        // array of various validations
         validateUser(),
         createUser,
     ]);
@@ -120,31 +107,30 @@ router
 
 router
     .route("/message")
-    .post(limiter, async (req, res, next) => {
-        if (!req.user) {
-            const error = new Error("not logged in");
-            error.status = 401;
-            return next(error);
-        }
-        try {
-            const hCaptchaResponse = await validate(
-                req.body["h-captcha-response"]
-            );
-            if (!hCaptchaResponse.success) {
-                const error = new Error(hCaptchaResponse["error-codes"]);
-                error.status = 403;
+    .post([
+        limiter,
+        (req, res, next) => {
+            if (!req.user) {
+                const error = new Error("not logged in");
+                error.status = 401;
                 return next(error);
             }
-            const message = await Message.create({
-                title: req.body.title,
-                text: req.body.message,
-                author: req.user._id,
-            });
-            res.redirect("/");
-        } catch (error) {
-            next(error);
-        }
-    })
+            next();
+        },
+        validateHCaptcha,
+        async (req, res, next) => {
+            try {
+                const message = await Message.create({
+                    title: req.body.title,
+                    text: req.body.message,
+                    author: req.user._id,
+                });
+                res.redirect("/");
+            } catch (error) {
+                next(error);
+            }
+        },
+    ])
     .delete(async (req, res, next) => {
         // this endpoint is consumed in front end code, so it returns json
         if (!req.user) {
