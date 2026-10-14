@@ -1,8 +1,6 @@
 # Members only
 [Project](https://www.theodinproject.com/lessons/nodejs-members-only) to practice authentication and database actions. No focus on design. No email verification.
 
-Hosted on railway: https://odin-members-only-production-aba3.up.railway.app/
-
 ### Features
 - View messages
 - Sign up
